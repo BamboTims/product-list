@@ -52,7 +52,7 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex flex-col sm:flex-row justify-between mb-4 space-y-4 sm:space-y-0 sm:space-x-4">
+      <div className="flex flex-col lg:flex-row justify-between mb-4 space-y-4 sm:space-y-0 sm:space-x-4">
       <div>
         <label htmlFor="category" className="mr-2">Category:</label>
         <select id="category" value={filter} onChange={handleFilterChange} className="border rounded p-2">

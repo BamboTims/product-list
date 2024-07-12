@@ -65,7 +65,7 @@ To get started with this project, follow these steps:
 4. **Start the development server**:
 
    ```bash
-   npm start
+   npm run dev
    ```
 
    The application will be available at `http://localhost:5173`.

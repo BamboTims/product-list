@@ -11,7 +11,7 @@ This project is a responsive web page that displays a list of products. It uses 
 
 ## Demo
 
-A live demo of the project can be found [here](#).
+A live demo of the project can be found [here](https://main--timi-bloomcode.netlify.app/).
 
 ## Features
 

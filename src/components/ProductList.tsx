@@ -1,7 +1,8 @@
-// src/components/ProductList.tsx
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { fetchProducts } from '../api/product';
-import ProductCard from './ProductCard';
+
+
+import ProductCard, { type Product } from './ProductCard';
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);

@@ -1,9 +1,10 @@
-import  { useEffect,useState } from 'react';
+// src/components/ProductList.tsx
+import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../api/product';
 import ProductCard from './ProductCard';
 
 const ProductList: React.FC = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('');
   const [minPrice, setMinPrice] = useState<number | string>('');
@@ -25,7 +26,7 @@ const ProductList: React.FC = () => {
   };
 
   const filteredProducts = products.filter(product => {
-    const matchesCategory = product.category.includes(filter);
+    const matchesCategory = filter === '' || product.category.includes(filter);
     const matchesPrice = (minPrice === '' || product.price >= Number(minPrice)) &&
                          (maxPrice === '' || product.price <= Number(maxPrice));
     const matchesRating = minRating === '' || product.rating >= Number(minRating);
@@ -52,17 +53,17 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex flex-col lg:flex-row justify-between mb-4 space-y-4 sm:space-y-0 sm:space-x-4">
-      <div>
-        <label htmlFor="category" className="mr-2">Category:</label>
-        <select id="category" value={filter} onChange={handleFilterChange} className="border rounded p-2">
-          <option value="">All</option>
-          <option value="beauty">Beauty</option>
-          <option value="groceries">Groceries</option>
-          <option value="fragrances">Fragrances</option>
-          <option value="furniture">Furniture</option>
-        </select>
-      </div>
+      <div className="flex flex-col lg:flex-row justify-between mb-6 space-y-4 lg:space-y-0 lg:space-x-4">
+        <div>
+          <label htmlFor="category" className="mr-2 font-semibold">Category:</label>
+          <select id="category" value={filter} onChange={handleFilterChange} className="border rounded p-2">
+            <option value="">All</option>
+            <option value="beauty">Beauty</option>
+            <option value="groceries">Groceries</option>
+            <option value="fragrances">Fragrances</option>
+            <option value="furniture">Furniture</option>
+          </select>
+        </div>
         <div className="flex space-x-2">
           <input
             type="number"
@@ -96,16 +97,16 @@ const ProductList: React.FC = () => {
           <option value="rating">Rating</option>
         </select>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {currentProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex justify-between items-center mt-8">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className="p-2 bg-gray-300 rounded disabled:opacity-50"
+          className="p-2 bg-gray-300 rounded disabled:opacity-50 hover:bg-gray-400"
         >
           Previous
         </button>
@@ -114,7 +115,7 @@ const ProductList: React.FC = () => {
             <button
               key={index + 1}
               onClick={() => paginate(index + 1)}
-              className={`p-2 ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'} rounded`}
+              className={`p-2 ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'} rounded hover:bg-blue-400`}
             >
               {index + 1}
             </button>
@@ -123,7 +124,7 @@ const ProductList: React.FC = () => {
         <button
           onClick={nextPage}
           disabled={currentPage === Math.ceil(sortedProducts.length / productsPerPage)}
-          className="p-2 bg-gray-300 rounded disabled:opacity-50"
+          className="p-2 bg-gray-300 rounded disabled:opacity-50 hover:bg-gray-400"
         >
           Next
         </button>
